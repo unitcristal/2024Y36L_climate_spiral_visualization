@@ -98,8 +98,8 @@ function draw() {
   // 각 월을 원 주변에 배치
   for (let i = 0; i < months.length; i++) {
     let angle = map(i, 0, months.length, 0, TWO_PI) - PI / 3; // 정확한 12등분 계산
-    let x = 440 * cos(angle); // 텍스트의 x좌표
-    let y = 440 * sin(angle); // 텍스트의 y좌표
+    let x = 400 * cos(angle); // 텍스트의 x좌표
+    let y = 400 * sin(angle); // 텍스트의 y좌표
 
     push();
     translate(x, y); // 텍스트의 좌표로 이동
@@ -146,8 +146,8 @@ function draw() {
       if (!isNaN(anomaly)) {
         // anomaly 값의 범위를 -1 ~ 1로 설정하고 반경을 매핑
         let angle = map(i, 0, months.length, 0, TWO_PI) - PI / 3; // 각도 계산
-        let pr = map(previousAnomaly, -1, 0.92, minusOneRadius, oneRadius); // 이전 anomaly 값을 반경으로 변환
-        let r = map(anomaly, -1, 0.92, minusOneRadius, oneRadius); // anomaly 값을 반경으로 변환
+        let pr = map(previousAnomaly, -1, 0.93, minusOneRadius, oneRadius); // 이전 anomaly 값을 반경으로 변환
+        let r = map(anomaly, -1, 0.93, minusOneRadius, oneRadius); // anomaly 값을 반경으로 변환
 
         let x1 = r * cos(angle); // anomaly에 맞는 x좌표
         let y1 = r * sin(angle); // anomaly에 맞는 y좌표
