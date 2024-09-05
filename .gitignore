@@ -1,0 +1,6 @@
+.DS_Store
+ssl/
+.ipynb_checkpoints/
+.virtual_documents/
+.vscode/
+.Trash-0/

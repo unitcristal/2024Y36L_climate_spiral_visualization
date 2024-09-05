@@ -1,0 +1,6 @@
+jupyterlab
+jupyterlab-lsp
+python-lsp-server
+numpy
+pandas
+matplotlib
