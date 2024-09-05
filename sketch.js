@@ -98,8 +98,8 @@ function draw() {
   // 각 월을 원 주변에 배치
   for (let i = 0; i < months.length; i++) {
     let angle = map(i, 0, months.length, 0, TWO_PI) - PI / 3; // 정확한 12등분 계산
-    let x = 400 * cos(angle); // 텍스트의 x좌표
-    let y = 400 * sin(angle); // 텍스트의 y좌표
+    let x = 390 * cos(angle); // 텍스트의 x좌표
+    let y = 390 * sin(angle); // 텍스트의 y좌표
 
     push();
     translate(x, y); // 텍스트의 좌표로 이동
