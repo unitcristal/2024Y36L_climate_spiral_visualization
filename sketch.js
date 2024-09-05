@@ -17,7 +17,7 @@ const lastMonth = 7; // Jul의 인덱스는 6
 
 function preload() {
   // 데이터를 로드하는 부분
-  data = loadTable("GLB_Ts+dSST.csv", "csv", "header");
+  data = loadTable("glb_temp.csv", "csv", "header");
 }
 
 function setup() {
