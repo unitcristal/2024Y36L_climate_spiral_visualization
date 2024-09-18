@@ -144,52 +144,53 @@ function draw() {
 
       // anomaly 값이 ***인지 확인하고 그리기를 중단
       if (anomaly === "***") {
-        noLoop(); // 모든 데이터를 다 그리면 draw()를 멈춤
+        console.log("Encountered '***', stopping the visualization.");
+        noLoop(); // 시각화를 멈춤
         return; // 더 이상 그리지 않도록 draw() 종료
       }
 
-      // anomaly 값이 숫자이고 유효한 값일 경우
       anomaly = parseFloat(anomaly); // 문자열을 숫자로 변환
-      if (!isNaN(anomaly)) {
+      if (isNaN(anomaly)) {
         console.log(
           `Anomaly is not a number for ${row.get("Year")} ${months[i]}`
         );
-
-        // anomaly 값의 범위를 -1 ~ 1로 설정하고 반경을 매핑
-        let angle = map(i, 0, months.length, 0, TWO_PI) - PI / 3; // 각도 계산
-        let pr = map(
-          previousAnomaly,
-          -1,
-          weird_v,
-          minusOneRadius,
-          onePointFiveRadius
-        ); // 이전 anomaly 값을 반경으로 변환
-        let r = map(anomaly, -1, weird_v, minusOneRadius, onePointFiveRadius); // anomaly 값을 반경으로 변환
-
-        let x1 = r * cos(angle); // anomaly에 맞는 x좌표
-        let y1 = r * sin(angle); // anomaly에 맞는 y좌표
-        let x2 = pr * cos(angle - PI / 6); // 이전 anomaly에 맞는 x좌표
-        let y2 = pr * sin(angle - PI / 6); // 이전 anomaly에 맞는 y좌표
-
-        // anomaly 값에 따른 색상 설정 (-1 ~ 0: 파랑 -> 흰색, 0 ~ 1: 흰색 -> 빨강)
-        let c;
-        if (anomaly < 0) {
-          c = lerpColor(
-            color(0, 0, 255),
-            color(255),
-            map(anomaly, -1, 0, 0, 1)
-          ); // 파랑 -> 흰색
-        } else {
-          c = lerpColor(color(255), color(255, 0, 0), map(anomaly, 0, 1, 0, 1)); // 흰색 -> 빨강
-        }
-        stroke(c);
-
-        if (!firstValue) {
-          line(x2, y2, x1, y1); // 이전 점과 현재 점을 선으로 연결
-        }
-        firstValue = false;
-        previousAnomaly = anomaly;
+        continue;
       }
+
+      if (row.get("Year") === "2023" && months[i] === "Sep") {
+        console.log(`2023년 9월 anomaly: ${anomaly}`);
+      }
+
+      // anomaly 값의 범위를 -1 ~ 1로 설정하고 반경을 매핑
+      let angle = map(i, 0, months.length, 0, TWO_PI) - PI / 3; // 각도 계산
+      let pr = map(
+        previousAnomaly,
+        -1,
+        weird_v,
+        minusOneRadius,
+        onePointFiveRadius
+      ); // 이전 anomaly 값을 반경으로 변환
+      let r = map(anomaly, -1, weird_v, minusOneRadius, onePointFiveRadius); // anomaly 값을 반경으로 변환
+
+      let x1 = r * cos(angle); // anomaly에 맞는 x좌표
+      let y1 = r * sin(angle); // anomaly에 맞는 y좌표
+      let x2 = pr * cos(angle - PI / 6); // 이전 anomaly에 맞는 x좌표
+      let y2 = pr * sin(angle - PI / 6); // 이전 anomaly에 맞는 y좌표
+
+      // anomaly 값에 따른 색상 설정 (-1 ~ 0: 파랑 -> 흰색, 0 ~ 1: 흰색 -> 빨강)
+      let c;
+      if (anomaly < 0) {
+        c = lerpColor(color(0, 0, 255), color(255), map(anomaly, -1, 0, 0, 1)); // 파랑 -> 흰색
+      } else {
+        c = lerpColor(color(255), color(255, 0, 0), map(anomaly, 0, 1, 0, 1)); // 흰색 -> 빨강
+      }
+      stroke(c);
+
+      if (!firstValue) {
+        line(x2, y2, x1, y1); // 이전 점과 현재 점을 선으로 연결
+      }
+      firstValue = false;
+      previousAnomaly = anomaly;
     }
   }
 

@@ -9,14 +9,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ssl /root/.jupyter/ssl
 
-EXPOSE 3000
+EXPOSE 8888
 
 COPY . .
 
 CMD ["jupyter", "lab", \
     "--allow-root", \
     "--ip=0.0.0.0", \
-    "--port=3000", \
+    "--port=8888", \
     "--no-browser", \
     "--NotebookApp.token=''", \
     "--certfile=/root/.jupyter/ssl/cert.pem", \
